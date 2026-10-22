@@ -1,0 +1,35 @@
+# values.yaml
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+
+persistence:
+  config:
+    enabled: true
+    size: 5Gi
+    storageClass: ''
+  media:
+    enabled: true
+    existingClaim: jellyfin-media-nfs
+
+ingress:
+  enabled: true
+  className: 'traefik'
+  hosts:
+    - host: jellyfin.homelab.test
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 4Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
